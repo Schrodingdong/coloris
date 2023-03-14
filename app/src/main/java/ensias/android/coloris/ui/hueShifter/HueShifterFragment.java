@@ -1,6 +1,7 @@
-package ensias.android.coloris.ui.home;
+package ensias.android.coloris.ui.hueShifter;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import ensias.android.coloris.databinding.FragmentHomeBinding;
+import ensias.android.coloris.databinding.FragmentHueShifterBinding;
 
-public class HomeFragment extends Fragment {
+public class HueShifterFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentHueShifterBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        HueShifterViewModel hueShifterViewModel =
+                new ViewModelProvider(this).get(HueShifterViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentHueShifterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        final TextView textView = binding.textDashboard;
+//        hueShifterViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_color_detector">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="ensias.android.coloris.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_color_detector"
+        android:name="ensias.android.coloris.ui.colorDetector.ColorDetectorFragment"
+        android:label="@string/title_docs"
+        tools:layout="@layout/fragment_color_detector" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="ensias.android.coloris.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_hue_shifter"
+        android:name="ensias.android.coloris.ui.hueShifter.HueShifterFragment"
+        android:label="@string/title_color_detector"
+        tools:layout="@layout/fragment_hue_shifter" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="ensias.android.coloris.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_wiki"
+        android:name="ensias.android.coloris.ui.wiki.WikiFragment"
+        android:label="@string/title_hue_shift"
+        tools:layout="@layout/fragment_wiki" />
 </navigation>

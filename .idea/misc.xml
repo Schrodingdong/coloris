@@ -4,11 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.301" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_book_icon.xml" value="0.301" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.301" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_detail_bottom_sheet.xml" value="0.3395" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_drawer_pull_tab.xml" value="0.3395" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.301" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_launcher_background.xml" value="0.301" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_magnify_scan.xml" value="0.301" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.301" />
-        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/activity_main.xml" value="0.3079710144927536" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_hue_shifter.xml" value="0.36666666666666664" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

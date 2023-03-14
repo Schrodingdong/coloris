@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.colorDetector.ColorDetectorFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="375dp"
+            android:layout_height="500dp"
+            android:padding="@dimen/padding"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/ic_detail_bottom_sheet"
+            android:elevation="@dimen/elevation_m"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+            <LinearLayout
+                android:id="@+id/drawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/drawer_handle"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_drawer_pull_tab"/>
+
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:text="@string/title_color_name"
+                            android:padding="@dimen/padding_text" />
+                        <TextView
+                            android:text="xxxxxxxxxxxxxxxx"
+                            android:gravity="right"
+                            android:padding="@dimen/padding_text" />
+                    </TableRow>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"
+                        android:layout_marginTop="@dimen/gap"
+                        android:layout_marginBottom="@dimen/gap" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:text="@string/title_incompatible_colorblindness_type"
+                            android:padding="@dimen/padding_text" />
+                        <TextView
+                            android:text="xxxxxxxxxxxxxxxx"
+                            android:gravity="right"
+                            android:padding="@dimen/padding_text" />
+                    </TableRow>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"
+                        android:layout_marginTop="@dimen/gap"
+                        android:layout_marginBottom="@dimen/gap"/>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:text="@string/title_color_code_table"
+                            android:padding="@dimen/padding_text" />
+                        <TextView
+                            android:gravity="right"
+                            android:padding="@dimen/padding_text" />
+                    </TableRow>
+                </TableLayout>
+
+
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/padding">
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="1">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="@string/rgb"
+                                android:padding="@dimen/padding_text" />
+                            <TextView
+                                android:text="xxxxxxxxx"
+                                android:gravity="right"
+                                android:padding="@dimen/padding_text" />
+                        </TableRow>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray"
+                            android:layout_marginTop="@dimen/gap"
+                            android:layout_marginBottom="@dimen/gap"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="@string/cmyk"
+                                android:padding="@dimen/padding_text" />
+                            <TextView
+                                android:text="xxxxxxxxx"
+                                android:gravity="right"
+                                android:padding="@dimen/padding_text" />
+                        </TableRow>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray"
+                            android:layout_marginTop="@dimen/gap"
+                            android:layout_marginBottom="@dimen/gap"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="@string/hex"
+                                android:padding="@dimen/padding_text" />
+                            <TextView
+                                android:text="xxxxxxxxx"
+                                android:gravity="right"
+                                android:padding="@dimen/padding_text" />
+                        </TableRow>
+                    </TableLayout>
+                </FrameLayout
+>
+
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Coloris</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_docs">Docs</string>
+    <string name="title_color_detector">Color Identifier</string>
+    <string name="title_hue_shift">Hue Shift</string>
+
+
+    <string name="title_color_name">Color name</string>
+    <string name="title_incompatible_colorblindness_type">incompatible colorblindness type</string>
+    <string name="title_color_code_table">Color Code table</string>
+
+    <string name="rgb">RGB</string>
+    <string name="cmyk">CMYK</string>
+    <string name="hex">HEX</string>
 </resources>
