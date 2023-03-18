@@ -3,7 +3,7 @@
 - [Getting Started with cameraX](https://developer.android.com/codelabs/camerax-getting-started#1)
 - [View Binding](https://developer.android.com/topic/libraries/view-binding)
     - Basicaly makes writing code that interacts with views easier to write. It creates a **ViewBinding** class for each **Layout File** we have
-
+- [Animated text for splashscreen](https://www.youtube.com/watch?v=JowSoKVO87E)
 
 # Note on the Architecture of the Project
 - we have a MainActivity file, and fragements for each section

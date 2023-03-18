@@ -12,7 +12,10 @@
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_launcher_background.xml" value="0.301" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_magnify_scan.xml" value="0.301" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.301" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/ic_splash_screen_backlground.xml" value="0.3255" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/drawable/splashscreenbackground.xml" value="0.3255" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/activity_splash_screen.xml" value="0.36231884057971014" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_color_detector.xml" value="0.35260416666666666" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
         <entry key="..\:/__Projects/Coloris/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />

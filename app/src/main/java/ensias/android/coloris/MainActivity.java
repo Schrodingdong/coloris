@@ -42,12 +42,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(binding.getRoot());
 
-
         // Using a Custom Service Class
         appServices = new AppServices(this);
         appServices.addNewService(new CameraService(this, binding));
         appServices.startAllServices();
-
 
         // TODO add navigation transition
 //        BottomNavigationView navView = binding.navView;
