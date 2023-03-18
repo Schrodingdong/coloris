@@ -12,10 +12,14 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.concurrent.ExecutionException;
-
 import ensias.android.coloris.MainActivity;
 import ensias.android.coloris.databinding.ActivityMainBinding;
+
+
+/*
+* Custom Camera Class to instantiate the Preview
+* TODO : Add the ImageAnalysis thingie mn tutorial
+* */
 
 public class CameraService implements CustomService{
     private static final String TAG = "CameraService";
