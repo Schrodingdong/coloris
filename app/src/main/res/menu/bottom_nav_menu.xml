@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_slider"
         android:title="@string/title_hue_shift" />
 
+    <item
+        android:id="@+id/navigation_notificationsdddd"
+        android:icon="@drawable/ic_slider"
+        android:title="dhiqsodhqsiodqjs" />
+
 </menu>

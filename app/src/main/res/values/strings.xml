@@ -10,6 +10,35 @@
     <string name="title_color_code_table">Color Code table</string>
 
     <string name="rgb">RGB</string>
-    <string name="cmyk">CMYK</string>
     <string name="hex">HEX</string>
+    <string name="cmyk">CMYK</string>
+
+
+    <string name="red_green_blindness">Red-green blindness</string>
+    <string name="blue_yellow_blindness">Blue-yellow blindness</string>
+    <string name="complete_color_blindness">Complete color blindness</string>
+
+    <string name="Deuteranomaly"><b>Deuteranomaly</b> is the most common type of red-green color blindness. It makes green look more red. This type is mild and doesn’t usually get in the way of normal activities.</string>
+    <string name="Protanomaly"><b>Protanomaly</b> makes red look more green and less bright. This type is mild and usually doesn’t get in the way of normal activities.</string>
+    <string name="Protanopia_Deuteranopia"><b>Protanopia</b> and <b>deuteranopia</b> both make you unable to tell the difference between red and green at all.</string>
+
+    <string-array name="Red_green_blindness_arr">
+        <item>@string/Deuteranomaly</item>
+        <item>@string/Protanomaly</item>
+        <item>@string/Protanopia_Deuteranopia</item>
+    </string-array>
+
+
+
+    <string name="Tritanomaly"><b>Tritanomaly</b> makes it hard to tell the difference between blue and green, and between yellow and red.</string>
+    <string name="Tritanopia"><b>Tritanopia</b> makes you unable to tell the difference between blue and green, purple and red, and yellow and pink. It also makes colors look less bright.</string>
+
+
+    <string-array name="Blue_yellow_blindness_arr">
+        <item>@string/Tritanomaly</item>
+        <item>@string/Tritanopia</item>
+    </string-array>
+
+    <string name="complete_color_blindness_txt">If you have complete color blindness, you can’t see colors at all. This is also called monochromacy, and it’s quite uncommon. Depending on the type, you may also have trouble seeing clearly and you may be more sensitive to light.</string>
+
 </resources>

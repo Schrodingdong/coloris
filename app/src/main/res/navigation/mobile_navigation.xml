@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_color_detector">
+    app:startDestination="@+id/navigation_wiki">
 
     <fragment
         android:id="@+id/navigation_color_detector"
         android:name="ensias.android.coloris.ui.colorDetector.ColorDetectorFragment"
-        android:label="@string/title_docs"
+        android:label="@string/title_color_detector"
         tools:layout="@layout/fragment_color_detector" />
 
     <fragment
         android:id="@+id/navigation_hue_shifter"
         android:name="ensias.android.coloris.ui.hueShifter.HueShifterFragment"
-        android:label="@string/title_color_detector"
+        android:label="@string/title_hue_shift"
         tools:layout="@layout/fragment_hue_shifter" />
 
     <fragment
         android:id="@+id/navigation_wiki"
         android:name="ensias.android.coloris.ui.wiki.WikiFragment"
-        android:label="@string/title_hue_shift"
+        android:label="@string/title_docs"
         tools:layout="@layout/fragment_wiki" />
 </navigation>
