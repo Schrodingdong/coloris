@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         appServices = new AppServices(this);
         appServices.addNewService(new CameraService(this, binding));
         appServices.startAllServices();
-
         // Navigation menu
         navView = binding.navView;
         navView.setOnItemSelectedListener(item -> {
