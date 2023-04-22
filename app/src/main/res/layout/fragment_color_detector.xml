@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.colorDetector.ColorDetectorFragment">
-
+    <androidx.camera.view.PreviewView
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,158 +21,195 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
-            android:id="@+id/bottom_sheet"
-            android:layout_width="375dp"
-            android:layout_height="500dp"
-            android:padding="@dimen/padding"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_detail_bottom_sheet"
-            android:elevation="@dimen/elevation_m"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-            <LinearLayout
-                android:id="@+id/drawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-                <ImageView
-                    android:id="@+id/drawer_handle"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_drawer_pull_tab"/>
+        <ImageView
+            android:id="@+id/testImageView"
+            android:layout_width="200dp"
+            android:layout_height="450dp"
+            android:layout_gravity="center"/>
+
+<!--        <FrameLayout-->
+<!--            android:id="@+id/bottom_sheet"-->
+<!--            android:layout_width="375dp"-->
+<!--            android:layout_height="500dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:background="@drawable/ic_detail_bottom_sheet"-->
+<!--            android:elevation="@dimen/elevation_m"-->
+<!--            android:padding="@dimen/padding"-->
+<!--            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/drawer"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/drawer_handle"-->
+<!--                    android:layout_width="70dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:src="@drawable/ic_drawer_pull_tab" />-->
 
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:stretchColumns="1">
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center">
-                        <TextView
-                            android:layout_width="120dp"
-                            android:text="@string/title_color_name"
-                            android:padding="@dimen/padding_text" />
-                        <TextView
-                            android:text="xxxxxxxxxxxxxxxx"
-                            android:gravity="right"
-                            android:padding="@dimen/padding_text" />
-                    </TableRow>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"
-                        android:layout_marginTop="@dimen/gap"
-                        android:layout_marginBottom="@dimen/gap" />
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center">
-                        <TextView
-                            android:layout_width="120dp"
-                            android:text="@string/title_incompatible_colorblindness_type"
-                            android:padding="@dimen/padding_text" />
-                        <TextView
-                            android:text="xxxxxxxxxxxxxxxx"
-                            android:gravity="right"
-                            android:padding="@dimen/padding_text" />
-                    </TableRow>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"
-                        android:layout_marginTop="@dimen/gap"
-                        android:layout_marginBottom="@dimen/gap"/>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center">
-                        <TextView
-                            android:layout_width="120dp"
-                            android:text="@string/title_color_code_table"
-                            android:padding="@dimen/padding_text" />
-                        <TextView
-                            android:gravity="right"
-                            android:padding="@dimen/padding_text" />
-                    </TableRow>
-                </TableLayout>
+<!--                <TableLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:stretchColumns="1">-->
+
+<!--                    <TableRow-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:gravity="center">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="120dp"-->
+<!--                            android:padding="@dimen/padding_text"-->
+<!--                            android:text="@string/title_color_name" />-->
+
+<!--                        <TextView-->
+<!--                            android:gravity="right"-->
+<!--                            android:padding="@dimen/padding_text"-->
+<!--                            android:text="xxxxxxxxxxxxxxxx" />-->
+<!--                    </TableRow>-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_marginTop="@dimen/gap"-->
+<!--                        android:layout_marginBottom="@dimen/gap"-->
+<!--                        android:background="@color/gray" />-->
+
+<!--                    <TableRow-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:gravity="center">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="120dp"-->
+<!--                            android:padding="@dimen/padding_text"-->
+<!--                            android:text="@string/title_incompatible_colorblindness_type" />-->
+
+<!--                        <TextView-->
+<!--                            android:gravity="right"-->
+<!--                            android:padding="@dimen/padding_text"-->
+<!--                            android:text="xxxxxxxxxxxxxxxx" />-->
+<!--                    </TableRow>-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_marginTop="@dimen/gap"-->
+<!--                        android:layout_marginBottom="@dimen/gap"-->
+<!--                        android:background="@color/gray" />-->
+
+<!--                    <TableRow-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:gravity="center">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="120dp"-->
+<!--                            android:padding="@dimen/padding_text"-->
+<!--                            android:text="@string/title_color_code_table" />-->
+
+<!--                        <TextView-->
+<!--                            android:gravity="right"-->
+<!--                            android:padding="@dimen/padding_text" />-->
+<!--                    </TableRow>-->
+<!--                </TableLayout>-->
 
 
+<!--                <FrameLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="@dimen/padding">-->
+
+<!--                    <TableLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:stretchColumns="1">-->
+
+<!--                        <TableRow-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:padding="@dimen/padding_text"-->
+<!--                                android:text="@string/rgb" />-->
+
+<!--                            <TextView-->
+<!--                                android:gravity="right"-->
+<!--                                android:padding="@dimen/padding_text"-->
+<!--                                android:text="xxxxxxxxx" />-->
+<!--                        </TableRow>-->
+
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="1dp"-->
+<!--                            android:layout_marginTop="@dimen/gap"-->
+<!--                            android:layout_marginBottom="@dimen/gap"-->
+<!--                            android:background="@color/gray" />-->
+
+<!--                        <TableRow-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:padding="@dimen/padding_text"-->
+<!--                                android:text="@string/cmyk" />-->
+
+<!--                            <TextView-->
+<!--                                android:gravity="right"-->
+<!--                                android:padding="@dimen/padding_text"-->
+<!--                                android:text="xxxxxxxxx" />-->
+<!--                        </TableRow>-->
+
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="1dp"-->
+<!--                            android:layout_marginTop="@dimen/gap"-->
+<!--                            android:layout_marginBottom="@dimen/gap"-->
+<!--                            android:background="@color/gray" />-->
+
+<!--                        <TableRow-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:padding="@dimen/padding_text"-->
+<!--                                android:text="@string/hex" />-->
+
+<!--                            <TextView-->
+<!--                                android:gravity="right"-->
+<!--                                android:padding="@dimen/padding_text"-->
+<!--                                android:text="xxxxxxxxx" />-->
+<!--                        </TableRow>-->
+<!--                    </TableLayout>-->
+<!--                </FrameLayout>-->
 
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/padding">
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:stretchColumns="1">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:text="@string/rgb"
-                                android:padding="@dimen/padding_text" />
-                            <TextView
-                                android:text="xxxxxxxxx"
-                                android:gravity="right"
-                                android:padding="@dimen/padding_text" />
-                        </TableRow>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/gray"
-                            android:layout_marginTop="@dimen/gap"
-                            android:layout_marginBottom="@dimen/gap"/>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:text="@string/cmyk"
-                                android:padding="@dimen/padding_text" />
-                            <TextView
-                                android:text="xxxxxxxxx"
-                                android:gravity="right"
-                                android:padding="@dimen/padding_text" />
-                        </TableRow>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/gray"
-                            android:layout_marginTop="@dimen/gap"
-                            android:layout_marginBottom="@dimen/gap"/>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:text="@string/hex"
-                                android:padding="@dimen/padding_text" />
-                            <TextView
-                                android:text="xxxxxxxxx"
-                                android:gravity="right"
-                                android:padding="@dimen/padding_text" />
-                        </TableRow>
-                    </TableLayout>
-                </FrameLayout
->
+<!--            </LinearLayout>-->
 
 
-            </LinearLayout>
-
-
-        </FrameLayout>
+<!--        </FrameLayout>-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_take_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="75dp"
+        android:src="@drawable/baseline_camera_24"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

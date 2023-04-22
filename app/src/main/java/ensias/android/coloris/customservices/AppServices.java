@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ensias.android.coloris.MainActivity;
+import ensias.android.coloris.ui.colorDetector.ColorDetectorFragment;
 
 /*
 * this Class is to aggregate all the different services that our app could use
@@ -27,9 +28,9 @@ public class AppServices {
     private Context applicationContext;
     private Activity applicationActivity;
 
-    public AppServices(MainActivity mActivity){
-        this.applicationContext = mActivity;
-        this.applicationActivity = mActivity;
+    public AppServices(ColorDetectorFragment mActivity){
+        this.applicationContext = mActivity.getContext();
+        this.applicationActivity = mActivity.getActivity();
     }
 
 

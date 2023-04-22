@@ -13,4 +13,6 @@
 
     <dimen name="padding">20dp</dimen>
     <dimen name="padding_text">5dp</dimen>
+
+    <dimen name="palette_color_preview_size">50dp</dimen>
 </resources>

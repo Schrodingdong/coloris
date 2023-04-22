@@ -2,6 +2,7 @@ package ensias.android.coloris;
 
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AppServices appServices;
     private BottomNavigationView navView;
+    public static CameraService cameraService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(binding.getRoot());
 
-        // Using a Custom Service Class
-        appServices = new AppServices(this);
-        appServices.addNewService(new CameraService(this, binding));
-        appServices.startAllServices();
+//        // Using a Custom Service Class
+//        cameraService = new CameraService(this, binding);
+//        appServices = new AppServices(this);
+//        appServices.addNewService(cameraService);
+//        appServices.startAllServices();
 
         // Navigation menu
         navView = binding.navView;
