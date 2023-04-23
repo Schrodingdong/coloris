@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_popup"
+    android:background="@drawable/popup_background"
+    android:elevation="@dimen/elevation_m">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="425dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/segmentedImage"
+            android:layout_width="270dp"
+            android:layout_height="326dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                app:layout_constraintTop_toBottomOf="@+id/segmentedImage">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:padding="@dimen/padding_text"
+                        android:text="@string/title_color_name" />
+
+                    <TextView
+                        android:gravity="right"
+                        android:padding="@dimen/padding_text"
+                        android:text="xxxxxxxxxxxxxxxx" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/gap"
+                    android:layout_marginBottom="@dimen/gap"
+                    android:background="@color/gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:padding="@dimen/padding_text"
+                        android:text="@string/title_incompatible_colorblindness_type" />
+
+                    <TextView
+                        android:gravity="right"
+                        android:padding="@dimen/padding_text"
+                        android:text="xxxxxxxxxxxxxxxx" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/gap"
+                    android:layout_marginBottom="@dimen/gap"
+                    android:background="@color/gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:padding="@dimen/padding_text"
+                        android:text="@string/title_color_code_table" />
+
+                    <TextView
+                        android:gravity="right"
+                        android:padding="@dimen/padding_text" />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

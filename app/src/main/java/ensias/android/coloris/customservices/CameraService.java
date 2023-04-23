@@ -1,25 +1,18 @@
 package ensias.android.coloris.customservices;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.ContentResolver;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.OptIn;
 import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
-import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
@@ -27,12 +20,10 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.io.File;
-
-import ensias.android.coloris.R;
-import ensias.android.coloris.databinding.ActivityMainBinding;
 import ensias.android.coloris.databinding.FragmentColorDetectorBinding;
 import ensias.android.coloris.ui.colorDetector.ColorDetectorFragment;
+import ensias.android.coloris.util.CenterPopupWindowFactory;
+import ensias.android.coloris.util.PopupBundleKeys;
 
 
 /*
@@ -48,6 +39,8 @@ public class CameraService implements CustomService{
     private LifecycleOwner applicationLifeCycleOwner;
     private FragmentColorDetectorBinding binding;
     private ImageCapture imageCapture;
+    private Dialog popupDialog;
+
     public CameraService(ColorDetectorFragment mActivity, FragmentColorDetectorBinding binding){
         this.applicationContext = mActivity.getContext();
         this.applicationLifeCycleOwner = mActivity;
@@ -123,8 +116,16 @@ public class CameraService implements CustomService{
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                         Log.d(TAG, "Image Capture SUCCESS");
-                        binding.testImageView.setImageURI(outputFileResults.getSavedUri());
-                        File f = new File(outputFileResults.getSavedUri().getPath());
+
+                        // bundle data to display
+                        Bundle bundle = new Bundle();
+                        bundle.putString(PopupBundleKeys.IMAGE_URI.name(), outputFileResults.getSavedUri().toString());
+                        // Open popupWindow
+                        CenterPopupWindowFactory.instanciatePopup(
+                                applicationContext,
+                                binding.getRoot(),
+                                bundle
+                        );
                     }
 
                     @Override
