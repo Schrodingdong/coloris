@@ -1,6 +1,7 @@
 package ensias.android.coloris;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 
@@ -8,6 +9,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import org.opencv.android.OpenCVLoader;
 
 import ensias.android.coloris.customservices.AppServices;
 import ensias.android.coloris.customservices.CameraService;
@@ -28,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //test Opencv implementation
+        if (!OpenCVLoader.initDebug())
+            Log.e("OpenCV", "Unable to load OpenCV!");
+        else
+            Log.d("OpenCV", "OpenCV loaded Successfully!");
+
         // Get the biding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
