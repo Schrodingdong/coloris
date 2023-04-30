@@ -23,9 +23,9 @@
 
         <ImageView
             android:id="@+id/testImageView"
-            android:layout_width="200dp"
-            android:layout_height="450dp"
-            android:layout_gravity="center"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
 
 <!--        <FrameLayout-->
 <!--            android:id="@+id/bottom_sheet"-->

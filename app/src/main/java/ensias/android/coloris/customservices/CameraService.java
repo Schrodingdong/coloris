@@ -1,5 +1,8 @@
 package ensias.android.coloris.customservices;
 
+import static org.opencv.core.TermCriteria.COUNT;
+import static org.opencv.core.TermCriteria.EPS;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -12,6 +15,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.OptIn;
@@ -27,7 +31,13 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+import org.opencv.core.TermCriteria;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.File;
+import java.nio.ByteBuffer;
 
 import ensias.android.coloris.R;
 import ensias.android.coloris.databinding.ActivityMainBinding;
@@ -104,32 +114,47 @@ public class CameraService implements CustomService{
         }
     }
     public void takePicture(){
-        long timestamp = System.currentTimeMillis();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timestamp);
-        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
-
-        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        Log.d(TAG, "takePicture: " + uri);
-        ImageCapture.OutputFileOptions outputFileOptions =
-                new ImageCapture.OutputFileOptions
-                        .Builder(applicationContext.getContentResolver(), uri, contentValues)
-                        .build();
         imageCapture.takePicture(
-                outputFileOptions,
-                ContextCompat.getMainExecutor(applicationContext),
-                new ImageCapture.OnImageSavedCallback() {
+                ContextCompat.getMainExecutor(applicationContext), new ImageCapture.OnImageCapturedCallback() {
                     @Override
-                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        Log.d(TAG, "Image Capture SUCCESS");
-                        binding.testImageView.setImageURI(outputFileResults.getSavedUri());
-                        File f = new File(outputFileResults.getSavedUri().getPath());
+                    public void onCaptureSuccess(@NonNull ImageProxy image) {
+                        super.onCaptureSuccess(image);
+                        Toast.makeText(applicationContext, "Captured with SUCCESS", Toast.LENGTH_SHORT).show();
+                        ByteBuffer byteBuffer=image.getPlanes()[0].getBuffer();
+                        byteBuffer.rewind();
+
+                        byte[] bytes=new byte[byteBuffer.capacity()];
+                        byteBuffer.get(bytes);
+
+                        byte[] clonedBytes=bytes.clone();
+                        Bitmap bitmap=BitmapFactory.decodeByteArray(clonedBytes,0,clonedBytes.length);
+
+                        Mat src=new Mat();
+                        Bitmap bmp=bitmap.copy(Bitmap.Config.RGB_565,true);
+                        Utils.bitmapToMat(bmp,src);
+
+                        Mat src8Bit3Channel=new Mat();
+                        Imgproc.cvtColor(src,src8Bit3Channel,Imgproc.COLOR_BGRA2RGB);
+
+                        Mat dst=new Mat();
+                        Imgproc.pyrMeanShiftFiltering(src8Bit3Channel,dst,35.0,20.0,3,new TermCriteria(COUNT+EPS,10,0.9));
+                        Mat img2show=new Mat();
+                        Imgproc.cvtColor(dst,img2show,Imgproc.COLOR_BGRA2RGB);
+
+                        Bitmap out=Bitmap.createBitmap(img2show.width(),img2show.height(),Bitmap.Config.ARGB_8888);
+                        Utils.matToBitmap(img2show,out);
+
+                        binding.testImageView.setRotation((float) image.getImageInfo().getRotationDegrees());
+                        binding.testImageView.setImageBitmap(out);
+                        image.close();
+
+
                     }
 
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
-                        Log.e(TAG, "ERROR : " + exception.getMessage());
+                        super.onError(exception);
                     }
                 }
         );
