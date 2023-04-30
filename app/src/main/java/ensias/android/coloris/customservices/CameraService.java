@@ -131,7 +131,7 @@ public class CameraService implements CustomService{
                         Bitmap bitmap=BitmapFactory.decodeByteArray(clonedBytes,0,clonedBytes.length);
 
                         Mat src=new Mat();
-                        Bitmap bmp=bitmap.copy(Bitmap.Config.RGB_565,true);
+                        Bitmap bmp=bitmap.copy(Bitmap.Config.ARGB_8888,true);
                         Utils.bitmapToMat(bmp,src);
 
                         Mat src8Bit3Channel=new Mat();
