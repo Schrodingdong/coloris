@@ -48,6 +48,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 
+    //OpenCV Github-contrib
+    implementation 'com.quickbirdstudios:opencv-contrib:4.5.2'
     // Camera X
     /*
     * CameraX core library using the camera2 implementation

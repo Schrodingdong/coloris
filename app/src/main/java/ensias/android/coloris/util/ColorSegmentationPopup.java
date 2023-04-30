@@ -1,8 +1,12 @@
 package ensias.android.coloris.util;
 
+import static org.opencv.core.TermCriteria.COUNT;
+import static org.opencv.core.TermCriteria.EPS;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +24,13 @@ import android.widget.PopupWindow;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+import org.opencv.core.TermCriteria;
+import org.opencv.imgproc.Imgproc;
+
+import java.io.IOException;
 
 import ensias.android.coloris.R;
 
@@ -45,10 +56,11 @@ public class ColorSegmentationPopup implements IPopup{
         // show popup
         showPopup(darkBg, popupView, popupWindow);
 
-        // set image in the popup
-        ImageView segmentedImageView = popupView.findViewById(R.id.segmentedImage);
-        segmentedImageView.setImageURI(imageUri);
+        Bitmap bitmap=meanshift(imageUri);
 
+        // set image in the popup
+        ImageView segmentedImageView = popupView.findViewById(R.id.segmentedImage) ;
+        segmentedImageView.setImageBitmap(bitmap);
         // get imageClick location
         segmentedImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -105,6 +117,32 @@ public class ColorSegmentationPopup implements IPopup{
                 .alpha(finalAlpha)
                 .setDuration(shortAnimationDuration)
                 .setListener(null);
+    }
+
+    private Bitmap meanshift(Uri uriImage){
+        Bitmap bitmap=null;
+        ImageDecoder.Source source = ImageDecoder.createSource(applicationContext.getContentResolver(),uriImage);
+        try {
+            bitmap = ImageDecoder.decodeBitmap(source);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Mat src=new Mat();
+        Bitmap bmp=bitmap.copy(Bitmap.Config.ARGB_8888,true);
+        Utils.bitmapToMat(bmp,src);
+
+        Mat src8Bit3Channel=new Mat();
+        Imgproc.cvtColor(src,src8Bit3Channel,Imgproc.COLOR_BGRA2RGB);
+
+        Mat dst=new Mat();
+        Imgproc.pyrMeanShiftFiltering(src8Bit3Channel,dst,35.0,20.0,3,new TermCriteria(COUNT+EPS,10,0.9));
+        Mat img2show=new Mat();
+        Imgproc.cvtColor(dst,img2show,Imgproc.COLOR_BGRA2RGB);
+
+        Bitmap out=Bitmap.createBitmap(img2show.width(),img2show.height(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(img2show,out);
+        return out;
+//        return bitmap;
     }
 
 }
