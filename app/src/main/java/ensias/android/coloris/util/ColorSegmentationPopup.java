@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -56,6 +57,7 @@ public class ColorSegmentationPopup implements IPopup{
         showPopup(darkBg, popupView, popupWindow);
 
         Bitmap bitmap=meanshift(imageUri);
+        TextView textView=popupView.findViewById(R.id.color);
 
         // set image in the popup
         ImageView segmentedImageView = popupView.findViewById(R.id.segmentedImage) ;
@@ -76,7 +78,9 @@ public class ColorSegmentationPopup implements IPopup{
 //                Color pixelColor = getColor(x, y, segmentedImageView);
                 Log.d(TAG, "HexValue :" + hex);
                 String s=colorName(red,green,blue);
+                textView.setText(s);
                 Log.d("COLOR: ",s);
+
 
                 return true;
             }

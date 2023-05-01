@@ -52,7 +52,8 @@
                     <TextView
                         android:gravity="right"
                         android:padding="@dimen/padding_text"
-                        android:text="xxxxxxxxxxxxxxxx" />
+                        android:text="xxxxxxxxxxxxxxxx"
+                        android:id="@+id/color"/>
                 </TableRow>
 
                 <View
