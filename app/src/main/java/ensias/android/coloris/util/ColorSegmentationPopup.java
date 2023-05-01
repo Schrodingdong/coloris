@@ -7,9 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +21,7 @@ import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.opencsv.CSVReader;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
@@ -31,6 +29,7 @@ import org.opencv.core.TermCriteria;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import ensias.android.coloris.R;
 
@@ -67,9 +66,18 @@ public class ColorSegmentationPopup implements IPopup{
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int x = (int) motionEvent.getX();
                 int y = (int) motionEvent.getY();
+                int pixel=bitmap.getPixel(x,y);
+                int red=Color.red(pixel);
+                int green=Color.green(pixel);
+                int blue=Color.blue(pixel);
+
+                String hex="#"+Integer.toHexString(pixel);
                 Log.d(TAG, String.format("Where we touched : {x : %d, y : %d}",x,y));
-                Color pixelColor = getColor(x, y, segmentedImageView);
-                Log.d(TAG, "pixelValue :" + pixelColor);
+//                Color pixelColor = getColor(x, y, segmentedImageView);
+                Log.d(TAG, "HexValue :" + hex);
+                String s=colorName(red,green,blue);
+                Log.d("COLOR: ",s);
+
                 return true;
             }
         });
@@ -142,7 +150,41 @@ public class ColorSegmentationPopup implements IPopup{
         Bitmap out=Bitmap.createBitmap(img2show.width(),img2show.height(),Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(img2show,out);
         return out;
-//        return bitmap;
     }
 
+    private String colorName(int R,int G, int B){
+        InputStreamReader is;
+        int count=0;
+        int minimum=1000;
+        int distance=0;
+        String cName="";
+//        String s="";
+        try {
+            is=new InputStreamReader(applicationContext.getAssets().open("colors.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        CSVReader csv=new CSVReader(is);
+        String[] line;
+        try{
+            while ((line=csv.readNext())!=null){
+                int r=Integer.valueOf(line[3]);
+                int g=Integer.valueOf(line[4]);
+                int b=Integer.valueOf(line[5]);
+                distance=Math.abs(R-r)+Math.abs(G-g)+Math.abs(B-b);
+                if (distance<=minimum){
+                    minimum=distance;
+                    cName=line[1];
+                }
+//                s="Color Name: "+line[1]+"R: "+line[2]+"G: "+line[3]+"B: "+line[4]+"Hex: "+line[5];
+////                Log.d("CSV",s);
+//                count++;
+
+            }
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cName;
+    }
 }

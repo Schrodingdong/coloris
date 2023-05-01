@@ -50,6 +50,10 @@ dependencies {
 
     //OpenCV Github-contrib
     implementation 'com.quickbirdstudios:opencv-contrib:4.5.2'
+
+    //opencsv
+    implementation 'com.opencsv:opencsv:4.6'
+    
     // Camera X
     /*
     * CameraX core library using the camera2 implementation
