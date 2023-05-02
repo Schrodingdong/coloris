@@ -27,7 +27,8 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
 
         <ScrollView
             android:layout_width="match_parent"
