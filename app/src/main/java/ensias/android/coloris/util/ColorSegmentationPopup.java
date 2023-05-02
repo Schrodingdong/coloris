@@ -189,7 +189,7 @@ public class ColorSegmentationPopup implements IPopup {
 
         //apply color mean-shift
         Mat dst = new Mat();
-        Imgproc.pyrMeanShiftFiltering(noise, dst, 10.0, 20.0, 1, new TermCriteria(COUNT + EPS, 5, 1));
+        Imgproc.pyrMeanShiftFiltering(noise, dst, 10.0, 20.0, 1, new TermCriteria(TermCriteria.MAX_ITER| TermCriteria.EPS, 50, 0.001));
         noise.release();
 
         //convert 8-bit 3 channel to RGBA
