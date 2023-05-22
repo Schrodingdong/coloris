@@ -55,6 +55,14 @@
                         android:padding="@dimen/padding_text"
                         android:text="xxxxxxxxxxxxxxxx"
                         android:id="@+id/color"/>
+
+                    <Button
+                        android:id="@+id/buttonColorName"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/button_bg"
+                        android:padding="5dp"
+                        />
                 </TableRow>
 
                 <View
@@ -96,6 +104,19 @@
                         android:layout_width="120dp"
                         android:padding="@dimen/padding_text"
                         android:text="@string/title_color_code_table" />
+
+                    <TextView
+                        android:gravity="right"
+                        android:padding="@dimen/padding_text"
+                        android:text="xxxxxxxxxxxxxxxx"
+                        android:id="@+id/hex"/>
+                    <Button
+                        android:id="@+id/buttonHex"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/button_bg"
+                        android:padding="5dp"
+                        />
 
                     <TextView
                         android:gravity="right"

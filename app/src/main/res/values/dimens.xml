@@ -13,8 +13,8 @@
 
     <dimen name="padding">20dp</dimen>
     <dimen name="padding_text">5dp</dimen>
-    <dimen name="padding_popup">30dp</dimen>
+    <dimen name="padding_popup">15dp</dimen>
     <dimen name="margin">30dp</dimen>
 
-    <dimen name="palette_color_preview_size">50dp</dimen>
+    <dimen name="palette_color_preview_size">60dp</dimen>
 </resources>

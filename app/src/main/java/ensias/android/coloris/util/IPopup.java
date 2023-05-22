@@ -7,4 +7,5 @@ import android.view.View;
 
 public interface IPopup {
     void createPopup();
+    void onDestroy();
 }

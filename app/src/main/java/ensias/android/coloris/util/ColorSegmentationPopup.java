@@ -12,12 +12,14 @@ import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 import ensias.android.coloris.R;
 
@@ -45,6 +48,8 @@ public class ColorSegmentationPopup implements IPopup {
     View rootView;
     Bundle bundle;
     private final String TAG = "COLORSEGMENTATIONPOPUP";
+    private TextToSpeech text2SpeechColor;
+    private TextToSpeech text2SpeechHex;
 
     public ColorSegmentationPopup(Context applicationContext, View rootView, Bundle bundle) {
         this.applicationContext = applicationContext;
@@ -65,7 +70,50 @@ public class ColorSegmentationPopup implements IPopup {
 
         Bitmap bitmap = meanshift(imageUri);
         TextView textView = popupView.findViewById(R.id.color);
+        TextView textViewHex = popupView.findViewById(R.id.hex);
+        Button buttonColorName = popupView.findViewById(R.id.buttonColorName);
+        Button buttonHex = popupView.findViewById(R.id.buttonHex);
 
+        text2SpeechColor=new TextToSpeech(applicationContext, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i==TextToSpeech.SUCCESS){
+                    int result=text2SpeechColor.setLanguage(Locale.CANADA);
+                    if(result==TextToSpeech.LANG_MISSING_DATA || result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e(TAG,"Language unfortunetlly not supported");
+                    }else {
+                        buttonColorName.setEnabled(true);
+                    }
+                }
+            }
+        });
+
+        text2SpeechHex=new TextToSpeech(applicationContext, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i==TextToSpeech.SUCCESS){
+                    int result=text2SpeechHex.setLanguage(Locale.CANADA);
+                    if(result==TextToSpeech.LANG_MISSING_DATA || result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e(TAG,"Language unfortunetlly not supported");
+                    }else {
+                        buttonHex.setEnabled(true);
+                    }
+                }
+            }
+        });
+
+
+        buttonColorName.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tellColor(textView);
+            }
+        });
+
+        buttonHex.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tellHex(textViewHex);
+            }
+        });
         // set image in the popup
         ImageView segmentedImageView = popupView.findViewById(R.id.segmentedImage);
         segmentedImageView.setImageBitmap(bitmap);
@@ -104,6 +152,7 @@ public class ColorSegmentationPopup implements IPopup {
                 //get color name from csv.
                 String s = colorName(red, green, blue);
                 textView.setText(s);
+                textViewHex.setText(hex);
                 Log.d("COLOR: ", s);
 //                Color pixelColor = getColor(x, y, segmentedImageView);
 
@@ -119,6 +168,16 @@ public class ColorSegmentationPopup implements IPopup {
                 crossfade(popupView, popupView.getAlpha(), 0);
             }
         });
+    }
+
+    private void tellColor(TextView textView) {
+        text2SpeechColor.speak(textView.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
+        text2SpeechColor.setSpeechRate(0.50f);
+    }
+
+    private void tellHex(TextView textView) {
+        text2SpeechHex.speak(textView.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
+        text2SpeechHex.setSpeechRate(0.50f);
     }
 
     private static Color getColor(int x, int y, ImageView segmentedImageView) {
@@ -240,6 +299,19 @@ public class ColorSegmentationPopup implements IPopup {
             e.printStackTrace();
         }
         return cName;
+    }
+
+
+    @Override
+    public void onDestroy(){
+        if(text2SpeechColor!=null){
+            text2SpeechColor.stop();
+            text2SpeechColor.shutdown();
+        }
+        if(text2SpeechHex!=null){
+            text2SpeechHex.stop();
+            text2SpeechHex.shutdown();
+        }
     }
 
 }
