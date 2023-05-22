@@ -1,12 +1,9 @@
 package ensias.android.coloris.util;
 
-import static org.opencv.core.TermCriteria.COUNT;
-import static org.opencv.core.TermCriteria.EPS;
+import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,18 +32,42 @@ import org.opencv.core.TermCriteria;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.photo.Photo;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import ensias.android.coloris.R;
+import ensias.android.coloris.ui.hueShifter.HueShifterFragment;
+//import ensias.android.coloris.ui.popupColorDetector.PopupColorDetectorFragment;
+import androidx.fragment.app.Fragment;
 
 public class ColorSegmentationPopup implements IPopup {
     Context applicationContext;
     View rootView;
     Bundle bundle;
     private final String TAG = "COLORSEGMENTATIONPOPUP";
+
+    //private PopupColorDetectorFragment binding;
+    private TextView textView;
+    private Button saveButton;
+    HueShifterFragment colorPalette =new HueShifterFragment();
+
+
+    public void setViews(TextView textView, Button saveButton) {
+        this.textView = textView;
+        this.saveButton = saveButton;
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = textView.getText().toString();
+                ArrayList<String> colorNames = colorPalette.getColorNames();
+                ArrayAdapter<String> adapter = colorPalette.adapter;
+                colorPalette.addColorName(text);
+
+            }
+        });
+    }
 
     public ColorSegmentationPopup(Context applicationContext, View rootView, Bundle bundle) {
         this.applicationContext = applicationContext;
@@ -56,7 +79,7 @@ public class ColorSegmentationPopup implements IPopup {
     public void createPopup() {
         Uri imageUri = Uri.parse(bundle.get(PopupBundleKeys.IMAGE_URI.name()).toString());
         LayoutInflater inflater = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popup_window_color_detector, null);
+        View popupView = inflater.inflate(R.layout.fragment_popup_color_detector, null);
         View darkBg = rootView.findViewById(R.id.popup_dark_background);
         PopupWindow popupWindow = initialisePopupWindow(popupView);
 
@@ -65,6 +88,10 @@ public class ColorSegmentationPopup implements IPopup {
 
         Bitmap bitmap = meanshift(imageUri);
         TextView textView = popupView.findViewById(R.id.color);
+        saveButton = popupView.findViewById(R.id.button);
+        this.setViews(textView, saveButton);
+
+
 
         // set image in the popup
         ImageView segmentedImageView = popupView.findViewById(R.id.segmentedImage);
@@ -119,6 +146,30 @@ public class ColorSegmentationPopup implements IPopup {
                 crossfade(popupView, popupView.getAlpha(), 0);
             }
         });
+
+        //Save Button in popup
+
+        /*HueShifterFragment paletteFragment = new HueShifterFragment();
+
+        saveButton = popupView.findViewById(R.id.button);
+        saveButton.setOnClickListener(new View.OnClickListener() {*/
+
+        /*    @Override
+            public void onClick(View v){
+                String colorName = textView.getText().toString();
+                //HueShifterFragment paletteFragment = (HueShifterFragment) getParentFragmentManager().findFragmentById(R.id.gridContainer);
+                Log.d(TAG, "waaaaaa33333333333333333333333333333333333333333");
+                Log.d(TAG, colorName);
+               *//*if (paletteFragment != null) {*//*
+                    paletteFragment.addColorName(colorName);
+                    Log.d(TAG, "we good");
+
+                //}
+            }
+
+        });*/
+
+
     }
 
     private static Color getColor(int x, int y, ImageView segmentedImageView) {
@@ -241,5 +292,7 @@ public class ColorSegmentationPopup implements IPopup {
         }
         return cName;
     }
+
+
 
 }

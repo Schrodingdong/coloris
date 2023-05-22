@@ -2,7 +2,7 @@
     <string name="app_name">Coloris</string>
     <string name="title_docs">Wiki</string>
     <string name="title_color_detector">Color Identifier</string>
-    <string name="title_hue_shift">Hue Shift</string>
+    <string name="title_color_palette">Color Palette</string>
 
 
     <string name="title_color_name">Color name</string>

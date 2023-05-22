@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/menu_hue_shift"
-        android:icon="@drawable/ic_slider"
-        android:title="@string/title_hue_shift" />
+        android:icon="@drawable/ic_palette"
+        android:title="@string/title_color_palette" />
 
 </menu>
