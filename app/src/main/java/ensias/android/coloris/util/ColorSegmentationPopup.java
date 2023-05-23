@@ -108,6 +108,7 @@ public class ColorSegmentationPopup implements IPopup {
             public void onClick(View v) {
                 String text = textView.getText().toString();
                 DataObjectSingleton.addToListOfColorNames(text);
+                DataObjectSingleton.addToListOfColorHex("#000");
 
                 Log.d(TAG, "---------------------");
                 for (String i : DataObjectSingleton.getListOfColorNames()) {
@@ -145,7 +146,7 @@ public class ColorSegmentationPopup implements IPopup {
         TextViewAdapter adapter = new TextViewAdapter(Context context, ArrayList<String> colorNames);*/
         Context context = popupView.getContext();
         ArrayList<String> colorNames = new ArrayList<>();
-        colorPalette.setAdapter(new TextViewAdapter(context, colorNames));
+        colorPalette.setAdapter(new TextViewAdapter(context, R.layout.grid_item, colorNames));
         this.setViews(colorPalette.getColorNames(), colorPalette.getAdapter());
 
 

@@ -77,7 +77,7 @@ public class HueShifterFragment extends Fragment {
         GridView gridView = root.findViewById(R.id.colorpalette_gv);
 
 //        colorNames = new ArrayList<>();
-        adapter = new TextViewAdapter(getActivity(), DataObjectSingleton.getListOfColorNames());
+        adapter = new TextViewAdapter(getActivity(), R.layout.grid_item, DataObjectSingleton.getListOfColorNames(), DataObjectSingleton.getListOfColorHex());
         gridView.setAdapter(adapter);
 
         Log.d(TAG, "---------------------");

@@ -5,7 +5,8 @@ import java.util.List;
 
 public class DataObjectSingleton {
     private static DataObjectSingleton instance = null;
-    private static List<String> colorNames;
+    private static ArrayList<String> colorNames;
+    private static ArrayList<String> colorHex;
     private DataObjectSingleton(){
         colorNames = new ArrayList<>();
     }
@@ -22,6 +23,13 @@ public class DataObjectSingleton {
     }
     public static  List<String> getListOfColorNames(){
         return colorNames;
+    }
+
+    public static void addToListOfColorHex(String hex){
+        colorHex.add(hex);
+    }
+    public static  List<String> getListOfColorHex(){
+        return colorHex;
     }
 
 
