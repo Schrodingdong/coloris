@@ -1,13 +1,11 @@
 package ensias.android.coloris.util;
 
-import static org.opencv.core.TermCriteria.COUNT;
-import static org.opencv.core.TermCriteria.EPS;
+import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -37,15 +36,17 @@ import org.opencv.core.TermCriteria;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.photo.Photo;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import ensias.android.coloris.R;
+import ensias.android.coloris.ui.hueShifter.HueShifterFragment;
+import ensias.android.coloris.ui.hueShifter.TextViewAdapter;
+//import ensias.android.coloris.ui.popupColorDetector.PopupColorDetectorFragment;
+
 
 public class ColorSegmentationPopup implements IPopup {
     Context applicationContext;
@@ -60,8 +61,13 @@ public class ColorSegmentationPopup implements IPopup {
     private TextView rgbValueTextView;
     private TextView hexValueTextView;
     private TextView colorNameTextView;
+    private TextView colorHexTextView;
     private TextView incompatibleColorBlindnessTextView;
     private Button addToPalette;
+
+
+    private Button saveButton;
+    HueShifterFragment colorPalette =new HueShifterFragment();
 
 
     public ColorSegmentationPopup(Context applicationContext, View rootView, Bundle bundle) {
@@ -75,7 +81,7 @@ public class ColorSegmentationPopup implements IPopup {
     public void createPopup() {
         Uri imageUri = Uri.parse(bundle.get(PopupBundleKeys.IMAGE_URI.name()).toString());
         LayoutInflater inflater = (LayoutInflater) applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popup_window_color_detector, null);
+        View popupView = inflater.inflate(R.layout.fragment_popup_color_detector, null);
         View darkBg = rootView.findViewById(R.id.popup_dark_background);
         rgbValueTextView = popupView.findViewById(R.id.rgbValue);
         hexValueTextView = popupView.findViewById(R.id.hexValue);
@@ -88,7 +94,14 @@ public class ColorSegmentationPopup implements IPopup {
 
         Bitmap bitmap = meanshift(imageUri);
         colorNameTextView = popupView.findViewById(R.id.color);
-        TextView textView = popupView.findViewById(R.id.color);
+        colorHexTextView = popupView.findViewById(R.id.hexValue);
+
+//        Context context = popupView.getContext();
+//        ArrayList<String> colorNames = new ArrayList<>();
+//        colorPalette.setAdapter(new TextViewAdapter(context, R.layout.grid_item, colorNames));
+        saveButton = popupView.findViewById(R.id.button);
+        this.setViews(colorPalette.getColorNames(), colorPalette.getAdapter());
+
         Button buttonColorName = popupView.findViewById(R.id.buttonColorName);
         Button buttonHex = popupView.findViewById(R.id.buttonHex);
 
@@ -123,7 +136,7 @@ public class ColorSegmentationPopup implements IPopup {
 
         buttonColorName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tellColor(textView);
+                tellColor(colorNameTextView);
             }
         });
 
@@ -185,6 +198,34 @@ public class ColorSegmentationPopup implements IPopup {
                 darkBg.setVisibility(View.INVISIBLE);
                 crossfade(darkBg, darkBg.getAlpha(), 0);
                 crossfade(popupView, popupView.getAlpha(), 0);
+            }
+        });
+    }
+
+    public void setViews( ArrayList<String> colorNames,  TextViewAdapter adapter) {
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String colorName = colorNameTextView.getText().toString();
+                DataObjectSingleton.addToListOfColorNames(colorName);
+                String hex = colorHexTextView.getText().toString().substring(6);
+                DataObjectSingleton.addToListOfColorHex(hex);
+
+                Log.d(TAG, "---------------------");
+                for (String i : DataObjectSingleton.getListOfColorNames()) {
+                    Log.d(TAG, i);
+                }
+                for (String i : DataObjectSingleton.getListOfColorHex()) {
+                    Log.d(TAG, i);
+                }
+                Log.d(TAG, "---------------------");
+
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                    Log.d(TAG, "yay :D");
+                }
+
+
             }
         });
     }
@@ -344,6 +385,7 @@ public class ColorSegmentationPopup implements IPopup {
         }
         return cName;
     }
+
 
 
     @Override

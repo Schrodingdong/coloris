@@ -19,6 +19,7 @@ import ensias.android.coloris.ui.colorDetector.ColorDetectorFragment;
 import ensias.android.coloris.ui.hueShifter.HueShifterFragment;
 import ensias.android.coloris.ui.wiki.WikiFragment;
 import ensias.android.coloris.util.ColorisNotif;
+import ensias.android.coloris.util.DataObjectSingleton;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DataObjectSingleton.getInstance();
 
         if(OpenCVLoader.initDebug())
             Log.d("OpenCV","LOADED SUCCESS");

@@ -23,7 +23,7 @@
         android:id="@+id/color_palette"
         android:name="ensias.android.coloris.ui.hueShifter.HueShifterFragment"
         android:label="@string/title_palette"
-        tools:layout="@layout/fragment_hue_shifter" >
+        tools:layout="@layout/fragment_color_palette" >
         <action
             android:id="@+id/action_navigation_hue_shifter_to_navigation_color_detector"
             app:destination="@id/navigation_color_detector" />

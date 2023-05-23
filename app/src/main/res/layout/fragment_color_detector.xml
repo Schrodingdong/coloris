@@ -12,7 +12,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+
+
+    </androidx.camera.view.PreviewView>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -220,4 +224,30 @@
         android:background="@color/cardview_dark_background"
         android:alpha="0.25"
         android:visibility="invisible"/>
+
+    <!--<Button
+        android:id="@+id/button_save_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="75dp"
+        android:src="@drawable/ic_palette"
+        />-->
+    <!--<Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Color"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="75dp"/>-->
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
