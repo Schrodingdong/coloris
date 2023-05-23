@@ -11,9 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TextViewAdapter extends ArrayAdapter<String> {
-    public TextViewAdapter(Context context, ArrayList<String> items){
+    public TextViewAdapter(Context context, List<String> items){
         super(context, 0, items);
     }
 

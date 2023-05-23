@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import ensias.android.coloris.R;
 import ensias.android.coloris.databinding.FragmentColorPaletteBinding;
 import ensias.android.coloris.util.ColorSegmentationPopup;
+import ensias.android.coloris.util.DataObjectSingleton;
 
 public class HueShifterFragment extends Fragment {
 
@@ -75,12 +76,12 @@ public class HueShifterFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_color_palette, container, false);
         GridView gridView = root.findViewById(R.id.colorpalette_gv);
 
-        colorNames = new ArrayList<>();
-        adapter = new TextViewAdapter(getActivity(), colorNames);
+//        colorNames = new ArrayList<>();
+        adapter = new TextViewAdapter(getActivity(), DataObjectSingleton.getListOfColorNames());
         gridView.setAdapter(adapter);
 
         Log.d(TAG, "---------------------");
-        for (String i : colorNames) {
+        for (String i : DataObjectSingleton.getListOfColorNames()) {
             Log.d(TAG, i);
         }
         Log.d(TAG, "---------------------");

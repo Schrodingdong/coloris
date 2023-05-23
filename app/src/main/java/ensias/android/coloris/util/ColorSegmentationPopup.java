@@ -107,10 +107,10 @@ public class ColorSegmentationPopup implements IPopup {
             @Override
             public void onClick(View v) {
                 String text = textView.getText().toString();
-                colorNames.add(text);
+                DataObjectSingleton.addToListOfColorNames(text);
 
                 Log.d(TAG, "---------------------");
-                for (String i : colorNames) {
+                for (String i : DataObjectSingleton.getListOfColorNames()) {
                     Log.d(TAG, i);
                 }
                 Log.d(TAG, "---------------------");
