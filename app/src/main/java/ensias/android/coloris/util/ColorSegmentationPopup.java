@@ -1,8 +1,9 @@
 package ensias.android.coloris.util;
 
-import static android.content.ContentValues.TAG;
+import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
@@ -38,8 +39,9 @@ import java.util.ArrayList;
 
 import ensias.android.coloris.R;
 import ensias.android.coloris.ui.hueShifter.HueShifterFragment;
+import ensias.android.coloris.ui.hueShifter.TextViewAdapter;
 //import ensias.android.coloris.ui.popupColorDetector.PopupColorDetectorFragment;
-import androidx.fragment.app.Fragment;
+
 
 public class ColorSegmentationPopup implements IPopup {
     Context applicationContext;
@@ -51,9 +53,30 @@ public class ColorSegmentationPopup implements IPopup {
     private TextView textView;
     private Button saveButton;
     HueShifterFragment colorPalette =new HueShifterFragment();
+    /*private ArrayAdapter<String> adapter;
 
 
-    public void setViews(TextView textView, Button saveButton) {
+    public void setAdapter(ArrayAdapter<String> adapter) {
+        this.adapter = adapter;
+    }*/
+
+    /*public void setViews(TextView textView, Button saveButton) {
+        // ...
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = textView.getText().toString();
+                ArrayList<String> colorNames = colorPalette.getColorNames();
+                colorPalette.addColorName(text);
+                //adapter.notifyDataSetChanged(); // Call notifyDataSetChanged() on the adapter
+            }
+        });
+    }*/
+
+
+
+    //this.setViews(textView, saveButton);
+    /*public void setViews(TextView textView, Button saveButton) {
         this.textView = textView;
         this.saveButton = saveButton;
 
@@ -67,12 +90,39 @@ public class ColorSegmentationPopup implements IPopup {
 
             }
         });
-    }
+    }*/
+
+
 
     public ColorSegmentationPopup(Context applicationContext, View rootView, Bundle bundle) {
         this.applicationContext = applicationContext;
         this.rootView = rootView;
         this.bundle = bundle;
+    }
+    public void setViews( ArrayList<String> colorNames,  TextViewAdapter adapter) {
+        this.textView = textView;
+        this.saveButton = saveButton;
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = textView.getText().toString();
+                colorNames.add(text);
+
+                Log.d(TAG, "---------------------");
+                for (String i : colorNames) {
+                    Log.d(TAG, i);
+                }
+                Log.d(TAG, "---------------------");
+
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                    Log.d(TAG, "yay :D");
+                }
+
+
+            }
+        });
     }
 
     @Override
@@ -87,10 +137,16 @@ public class ColorSegmentationPopup implements IPopup {
         showPopup(darkBg, popupView, popupWindow);
 
         Bitmap bitmap = meanshift(imageUri);
-        TextView textView = popupView.findViewById(R.id.color);
-        saveButton = popupView.findViewById(R.id.button);
-        this.setViews(textView, saveButton);
 
+        this.textView = popupView.findViewById(R.id.color);
+        this.saveButton = popupView.findViewById(R.id.button);
+
+        /*colorNames = new ArrayList<>();
+        TextViewAdapter adapter = new TextViewAdapter(Context context, ArrayList<String> colorNames);*/
+        Context context = popupView.getContext();
+        ArrayList<String> colorNames = new ArrayList<>();
+        colorPalette.setAdapter(new TextViewAdapter(context, colorNames));
+        this.setViews(colorPalette.getColorNames(), colorPalette.getAdapter());
 
 
         // set image in the popup

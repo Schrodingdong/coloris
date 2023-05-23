@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import ensias.android.coloris.R;
 import ensias.android.coloris.databinding.FragmentColorPaletteBinding;
+import ensias.android.coloris.util.ColorSegmentationPopup;
 
 public class HueShifterFragment extends Fragment {
 
@@ -34,34 +35,48 @@ public class HueShifterFragment extends Fragment {
     private final String TAG = "COLORPALETTE";
 
     private ArrayList<String> colorNames;
-    public ArrayAdapter<String> adapter;
+    //public ArrayAdapter<String> adapter;
+    private  TextViewAdapter adapter;
     /*private static String[] colors={"red","green","blue","fidoo"};*/
     public HueShifterFragment() {
         colorNames = new ArrayList<>();
     }
-    public ArrayList<String> getColorNames() {
+   /* public ArrayList<String> getColorNames() {
         return colorNames;
     }
 
     public void setColorNames(ArrayList<String> colorNames) {
         this.colorNames = colorNames;
-    }
+    }*/
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HueShifterViewModel hueShifterViewModel =
+        /*HueShifterViewModel hueShifterViewModel =
                 new ViewModelProvider(this).get(HueShifterViewModel.class);
 
         binding = FragmentColorPaletteBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View root = binding.getRoot();*/
 
 
         //View view = inflater.inflate(R.layout.fragment_color_palette, container, false);
 
-        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, colorNames);
+        /*adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, colorNames);
         gridView = root.findViewById(R.id.colorpalette_gv);
+        gridView.setAdapter(adapter);
+
+        Log.d(TAG, "---------------------");
+        for (String i : colorNames) {
+            Log.d(TAG, i);
+        }
+        Log.d(TAG, "---------------------");*/
+
+        View root = inflater.inflate(R.layout.fragment_color_palette, container, false);
+        GridView gridView = root.findViewById(R.id.colorpalette_gv);
+
+        colorNames = new ArrayList<>();
+        adapter = new TextViewAdapter(getActivity(), colorNames);
         gridView.setAdapter(adapter);
 
         Log.d(TAG, "---------------------");
@@ -70,10 +85,24 @@ public class HueShifterFragment extends Fragment {
         }
         Log.d(TAG, "---------------------");
 
+        if (adapter.getCount() > 0) {
+            Log.d(TAG, "adapter full :D");
+        } else {
+            Log.d(TAG, "adapter null :((");
+        }
+
+
+
+
+
 
         return root;
     }
-    public void addColorName(String colorName) {
+
+    /*public ArrayAdapter<String> getAdapter() {
+        return adapter;
+    }*/
+    /*public void addColorName(String colorName) {
 
         this.colorNames.add(colorName);
         Log.d(TAG, colorName);
@@ -83,7 +112,7 @@ public class HueShifterFragment extends Fragment {
 
 
 
-    }
+    }*/
 
 
     @Override
@@ -92,5 +121,19 @@ public class HueShifterFragment extends Fragment {
         binding = null;
     }
 
+    public ArrayList<String> getColorNames() {
+        return colorNames;
+    }
 
+    public void setColorNames(ArrayList<String> colorNames) {
+        this.colorNames = colorNames;
+    }
+
+    public TextViewAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(TextViewAdapter adapter) {
+        this.adapter = adapter;
+    }
 }
