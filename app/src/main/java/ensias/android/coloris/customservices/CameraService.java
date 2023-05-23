@@ -28,7 +28,6 @@ import ensias.android.coloris.util.PopupBundleKeys;
 
 /*
 * Custom Camera Class to instantiate the Preview
-* TODO : Add the ImageAnalysis thingie mn tutorial
 * */
 
 public class CameraService implements CustomService{

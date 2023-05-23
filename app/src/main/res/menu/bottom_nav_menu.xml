@@ -12,8 +12,8 @@
         android:title="@string/title_color_detector" />
 
     <item
-        android:id="@+id/menu_hue_shift"
-        android:icon="@drawable/ic_slider"
-        android:title="@string/title_hue_shift" />
+        android:id="@+id/menu_palette"
+        android:icon="@drawable/baseline_palette_24"
+        android:title="@string/title_palette" />
 
 </menu>

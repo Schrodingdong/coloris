@@ -2,12 +2,12 @@
     <string name="app_name">Coloris</string>
     <string name="title_docs">Wiki</string>
     <string name="title_color_detector">Color Identifier</string>
-    <string name="title_hue_shift">Hue Shift</string>
+    <string name="title_palette">Palette Generator</string>
 
 
     <string name="title_color_name">Color name</string>
     <string name="title_incompatible_colorblindness_type">incompatible colorblindness type</string>
-    <string name="title_color_code_table">Color Code table</string>
+    <string name="title_color_code_table">Color Codes</string>
 
     <string name="rgb">RGB</string>
     <string name="hex">HEX</string>

@@ -1,9 +1,9 @@
 package ensias.android.coloris;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import ensias.android.coloris.databinding.ActivityMainBinding;
 import ensias.android.coloris.ui.colorDetector.ColorDetectorFragment;
 import ensias.android.coloris.ui.hueShifter.HueShifterFragment;
 import ensias.android.coloris.ui.wiki.WikiFragment;
+import ensias.android.coloris.util.ColorisNotif;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,14 +51,20 @@ public class MainActivity extends AppCompatActivity {
 //        appServices.addNewService(cameraService);
 //        appServices.startAllServices();
 
+        // Start the notification service
+        Intent serviceIntent = new Intent(this, ColorisNotif.class);
+        startService(serviceIntent);
+
+
         // Navigation menu
         navView = binding.navView;
+        navView.setSelectedItemId(R.id.menu_color_detector);
         navView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.menu_color_detector:
                     setCurrentFragment(new ColorDetectorFragment());
                     break;
-                case R.id.menu_hue_shift:
+                case R.id.menu_palette:
                     setCurrentFragment(new HueShifterFragment());
                     break;
                 case R.id.menu_wiki:

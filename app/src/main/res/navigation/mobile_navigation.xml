@@ -13,16 +13,16 @@
         tools:layout="@layout/fragment_color_detector" >
         <action
             android:id="@+id/action_navigation_color_detector_to_navigation_hue_shifter"
-            app:destination="@id/navigation_hue_shifter" />
+            app:destination="@id/color_palette" />
         <action
             android:id="@+id/action_navigation_color_detector_to_navigation_wiki"
             app:destination="@id/navigation_wiki" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_hue_shifter"
+        android:id="@+id/color_palette"
         android:name="ensias.android.coloris.ui.hueShifter.HueShifterFragment"
-        android:label="@string/title_hue_shift"
+        android:label="@string/title_palette"
         tools:layout="@layout/fragment_hue_shifter" >
         <action
             android:id="@+id/action_navigation_hue_shifter_to_navigation_color_detector"
@@ -42,6 +42,6 @@
             app:destination="@id/navigation_color_detector" />
         <action
             android:id="@+id/action_navigation_wiki_to_navigation_hue_shifter"
-            app:destination="@id/navigation_hue_shifter" />
+            app:destination="@id/color_palette" />
     </fragment>
 </navigation>

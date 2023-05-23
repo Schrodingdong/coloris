@@ -87,7 +87,7 @@ public class ColorDetectorFragment extends Fragment {
             public void onClick(View view) {
 //                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                startActivity(intent);
-                ColorDetectorFragment.cameraService.takePicture();
+                cameraService.takePicture();
             }
         });
         return fab;
