@@ -21,7 +21,6 @@ import ensias.android.coloris.ui.wiki.WikiFragment;
 import ensias.android.coloris.util.ColorisNotif;
 import ensias.android.coloris.util.DataObjectSingleton;
 
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
@@ -35,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DataObjectSingleton.getInstance();
 
-        if(OpenCVLoader.initDebug())
-            Log.d("OpenCV","LOADED SUCCESS");
+        if (OpenCVLoader.initDebug())
+            Log.d("OpenCV", "LOADED SUCCESS");
         else
-            Log.d("OpenCV","LOADED ERR");
+            Log.d("OpenCV", "LOADED ERR");
         // Get the biding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
@@ -47,22 +46,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(binding.getRoot());
 
-//        // Using a Custom Service Class
-//        cameraService = new CameraService(this, binding);
-//        appServices = new AppServices(this);
-//        appServices.addNewService(cameraService);
-//        appServices.startAllServices();
-
         // Start the notification service
         Intent serviceIntent = new Intent(this, ColorisNotif.class);
         startService(serviceIntent);
-
 
         // Navigation menu
         navView = binding.navView;
         navView.setSelectedItemId(R.id.menu_color_detector);
         navView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.menu_color_detector:
                     setCurrentFragment(new ColorDetectorFragment());
                     break;
@@ -77,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setCurrentFragment(Fragment f){
+    private void setCurrentFragment(Fragment f) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
                 .replace(R.id.nav_host_fragment_activity_main, f)

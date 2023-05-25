@@ -18,20 +18,16 @@ public class DataObjectSingleton {
         return instance;
     }
 
-
     public static void addToListOfColorNames(String colorName){
         colorNames.add(colorName);
     }
     public static  List<String> getListOfColorNames(){
         return colorNames;
     }
-
     public static void addToListOfColorHex(String hex){
         colorHex.add(hex);
     }
     public static  List<String> getListOfColorHex(){
         return colorHex;
     }
-
-
 }

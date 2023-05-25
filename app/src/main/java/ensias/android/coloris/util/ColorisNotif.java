@@ -54,8 +54,9 @@ public class ColorisNotif extends Service {
         startAsyncTaskPeriodically();
 
     }
+
     private void startAsyncTaskPeriodically() {
-        //let the service execute asyncTask every 1h
+        // let the service execute asyncTask every 1h
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -79,7 +80,6 @@ public class ColorisNotif extends Service {
         stopAsyncTask();
     }
 
-
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY;
     }
@@ -90,56 +90,52 @@ public class ColorisNotif extends Service {
         return null;
     }
 
-
-    //
     public String addNotification(String contentText) {// DISPLAYING NOTIFICATION (??)
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.icon)
-                        .setContentTitle("Coloris Fun Facts")
-                        .setContentText(contentText)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(contentText)).
-                        setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("Coloris Fun Facts")
+                .setContentText(contentText)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(contentText))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
 
-
         PendingIntent pendingIntent = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            pendingIntent = PendingIntent.getActivity
-                    (this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+            pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
         } else {
-            pendingIntent = PendingIntent.getActivity
-                    (this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+            pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                    PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         }
         builder.setContentIntent(pendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return "not granted";
         }
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {// creating a notification channel
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(CHANNEL_DESC);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
 
         }
         notificationManagerCompat.notify(1, builder.build());
-        return "granted";//display the notification
+        return "granted";// display the notification
     }
-    ////////////////////////////////////////// CHATGPT STUFF//////////////////////////////////////////////////////////////
-
+    ////////////////////////////////////////// CHATGPT
+    ////////////////////////////////////////// STUFF//////////////////////////////////////////////////////////////
 
     private static final String CHATGPT_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
 
     public static String callChatGPTAPI(String color) throws IOException {
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(CHATGPT_API_ENDPOINT).newBuilder();
-        /*urlBuilder.addQueryParameter("prompt", prompt); */
+        /* urlBuilder.addQueryParameter("prompt", prompt); */
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
@@ -151,14 +147,13 @@ public class ColorisNotif extends Service {
                         "    \"messages\": [\n" +
                         "        {\n" +
                         "            \"role\": \"user\",\n" +
-                        "            \"content\": \"give me a fun fact about the color" + color +"\"\n" +
+                        "            \"content\": \"give me a fun fact about the color" + color + "\"\n" +
                         "        }\n" +
                         "    ]\n" +
                         "}"))
                 .build();
 
-
-        try{
+        try {
             okhttp3.Response response = client.newCall(request).execute();
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected response code: " + response);
@@ -170,13 +165,15 @@ public class ColorisNotif extends Service {
             }
             BufferedSource source = responseBody.source();
             String stringResponse = source.readString(Charset.forName("UTF-8"));
-            //String stringResponse = responseBody.toString();
+            // String stringResponse = responseBody.toString();
 
             responseBody.close();
             return stringResponse;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;}}
+            return null;
+        }
+    }
 
     static String extractTextFromChatGPTResponse(String response) {
         if (response == null) {
@@ -199,10 +196,10 @@ public class ColorisNotif extends Service {
     }
 
     private class MyTask extends AsyncTask<Void, Void, String> {
-
         private String color;
         private String contentText;
-        public MyTask(String color){
+
+        public MyTask(String color) {
             this.color = color;
         }
 
@@ -213,8 +210,8 @@ public class ColorisNotif extends Service {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                return extractTextFromChatGPTResponse(callChatGPTAPI(color));
-
+                contentText = extractTextFromChatGPTResponse(callChatGPTAPI(color));
+                return contentText;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -224,7 +221,6 @@ public class ColorisNotif extends Service {
         protected void onPostExecute(String result) {
             addNotification(result);
         }
-
 
     }
 }

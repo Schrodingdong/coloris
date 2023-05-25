@@ -45,16 +45,11 @@ public class ColorDetectorFragment extends Fragment {
     private AppServices appServices;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Get the model class - Unused for now
-        ColorDetectorViewModel colorDetectorViewModel =
-                new ViewModelProvider(this).get(ColorDetectorViewModel.class);
-
+            ViewGroup container,
+            Bundle savedInstanceState) {
 
         // initialise the elements
         root = initialiseRoot(inflater, container);
-//        bottomSheet = initialiseBottomSheet();
         takePictureButton = initialiseFABpicture();
 
         // Using a Custom Service Class
@@ -68,25 +63,16 @@ public class ColorDetectorFragment extends Fragment {
     }
 
     @NonNull
-    private View initialiseRoot(LayoutInflater inflater, ViewGroup container){
+    private View initialiseRoot(LayoutInflater inflater, ViewGroup container) {
         binding = FragmentColorDetectorBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-//    private View initialiseBottomSheet(){
-//        View bottomSheet = root.findViewById(R.id.bottom_sheet);
-//        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-//        bottomSheetBehavior.setPeekHeight(500);
-//        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-//        Log.d(TAG, "[INFO] - Successfully initialised BottomSheet !");
-//        return bottomSheet;
-//    }
-    private FloatingActionButton initialiseFABpicture(){
+
+    private FloatingActionButton initialiseFABpicture() {
         FloatingActionButton fab = binding.buttonTakePicture;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivity(intent);
                 cameraService.takePicture();
             }
         });

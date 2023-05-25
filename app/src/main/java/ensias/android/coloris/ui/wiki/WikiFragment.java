@@ -18,15 +18,12 @@ public class WikiFragment extends Fragment {
     private FragmentWikiBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        WikiViewModel wikiViewModel =
-                new ViewModelProvider(this).get(WikiViewModel.class);
+            ViewGroup container, Bundle savedInstanceState) {
+        WikiViewModel wikiViewModel = new ViewModelProvider(this).get(WikiViewModel.class);
 
         binding = FragmentWikiBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        final TextView textView = binding.textNotifications;
-//        wikiViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
